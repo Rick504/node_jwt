@@ -9,6 +9,7 @@ const jwtSecret = process.env.JWT_SECRET as string;
 
 app.use(express.json());
 
+//middleware jwt
 function verificaToken(req: Request, res: Response, next: NextFunction) {
   const token = req.headers['x-access-token'];
 
@@ -45,12 +46,13 @@ app.post('/login', (req: Request, res: Response) => {
       return;
     }
 
+    //auth é opcional
     res.json({ auth: true, token });
   });
 });
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('teste');
+  res.send('testando rota publica sem a necessidade de token');
 });
 
 app.get('/protegido', verificaToken, (req: Request, res: Response) => {
