@@ -39,7 +39,8 @@ app.post('/login', (req: Request, res: Response) => {
     email: 'usuario@exemplo.com',
   };
 
-  jwt.sign({ user }, jwtSecret, { expiresIn: '1h' }, (err, token) => {
+  // se precisar do expiresIn em horas usar h, exemplo: 1h
+  jwt.sign({ user }, jwtSecret, { expiresIn: '30m' }, (err, token) => {
     if (err) {
       console.log(err);
       res.status(500).send('Erro ao gerar token.');
