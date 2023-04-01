@@ -11,14 +11,14 @@ app.use(express.json());
 
 //middleware jwt
 function verificaToken(req: Request, res: Response, next: NextFunction) {
-  const token = req.headers['x-access-token'];
+  const token = req.headers['x-access-token'] as string;
 
   if (!token) {
     res.status(401).send('Token não fornecido.');
     return;
   }
 
-  jwt.verify(token, jwtSecret, (err, decoded) => {
+  jwt.verify(token, jwtSecret, (err: any, decoded: any) => {
     if (err) {
       console.log(err);
       res.status(401).send('Token inválido.');
